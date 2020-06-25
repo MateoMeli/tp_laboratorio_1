@@ -82,19 +82,15 @@ static int addNode(LinkedList *this, int nodeIndex, void *pElement) {
 	if (this != NULL && newNode != NULL && nodeIndex >= 0 && nodeIndex <= len) {
 		newNode->pNextNode = NULL;
 		if (len == 0) {
-			//la lista esta vacia
 			this->pFirstNode = newNode;
 		} else {
 			if (nodeIndex == 0) {
-				//es la nueva cabeza
 				newNode->pNextNode = this->pFirstNode;
 				this->pFirstNode = newNode;
 			} else if (nodeIndex == len) {
-				//es la nueva cola
 				Node *previusNode = getNode(this, nodeIndex - 1);
 				previusNode->pNextNode = newNode;
 			} else {
-				//nodeindex == x - se lo inserta en el indice especificado, corriendo los demas
 				Node *previusNode = getNode(this, nodeIndex - 1);
 				newNode->pNextNode = previusNode->pNextNode;
 				previusNode->pNextNode = newNode;
@@ -447,15 +443,13 @@ int ll_sort(LinkedList *this, int (*pFunc)(void*, void*), int order) {
 			flagSwap = 0;
 			for (i = 0; i < size - 1; i++) {
 				if (pFunc(ll_get(this, i), ll_get(this, i + 1)) == 1 && order) {
-					//de menor a mayor y criteria =1
-					//ascendente a -z
+					
 					flagSwap = 1;
 					buffer = ll_get(this, i);
 					getNode(this, i)->pElement = getNode(this, i + 1)->pElement;
 					getNode(this, i + 1)->pElement = buffer;
 				} else if (pFunc(ll_get(this, i), ll_get(this, i + 1)) == -1 && !order) {
-					//de mayor a menor y criteria =0 descendente
-					//descendente z - a
+					
 					flagSwap = 1;
 					buffer = ll_get(this, i);
 					getNode(this, i)->pElement = getNode(this, i + 1)->pElement;
